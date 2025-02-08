@@ -1,0 +1,21 @@
+p {
+
+    color: blue;
+}
+
+h1 {color: #2ef107;}
+h2 {color: #f10797;}
+h3 {color: #f10707;}
+.B{
+
+    font-family: 'Courier New', Courier, monospace;
+}
+#A {
+    font-size: 35px;
+}
+
+body{
+    background-image: url(w.avif);
+    background-repeat: no-repeat;
+    background-size:cover;
+}
