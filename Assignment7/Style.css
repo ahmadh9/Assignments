@@ -1,21 +1,13 @@
-p {
-
-    color: blue;
-}
-
-h1 {color: #2ef107;}
-h2 {color: #f10797;}
-h3 {color: #f10707;}
-.B{
-
-    font-family: 'Courier New', Courier, monospace;
-}
-#A {
-    font-size: 35px;
-}
-
-body{
-    background-image: url(w.avif);
+#home{
+    background-image: url(Home.jpg);
     background-repeat: no-repeat;
-    background-size:cover;
+background-position: center;  
+  background-size:cover;
+  background-attachment: scroll;}
+#htu{
+    background-image: url(Htu_Back.png);
+    background-repeat: no-repeat;
+background-position: center;  
+  background-size:cover;
+  background-attachment: scroll;
 }
