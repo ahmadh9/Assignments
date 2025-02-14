@@ -1,0 +1,36 @@
+*{
+
+    box-sizing: border-box;
+}
+
+.flex-column{
+
+display: flex;
+flex-direction: column;
+gap: 10px;
+
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+}
+
+div{
+
+    padding: 8px;
+    border: 1px solid rgb(90, 34, 45);
+}
+
+.flex-1{
+flex: 1;
+
+}
+
+.flex-3{
+
+    flex: 3;
+}
+
