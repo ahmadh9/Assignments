@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-size: 24px;
+    color: green;
+    cursor: pointer;
+}
+
+.user-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.content {
+    display: flex;
+    padding: 20px;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 150px;
+    background: #f8f8f8;
+    padding: 20px;
+}
+
+.sidebar-content p {
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.main {
+ 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;  
+    height: 80vh; 
+    text-align: center;
+    max-width: 770px;
+    margin: auto;
+}
+
+
+.welcome h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    font-size: 14px;
+    color: #666;
+}
+
+
+.input-box {
+    display: flex;
+    max-width: 500px;
+    margin: 20px auto;
+    gap: 10px;
+    width: 100%;  
+    padding: 12px; 
+    font-size: 16px; 
+}
+
+input[type="text"] {
+
+
+  flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    max-width: 500px;
+    
+}
+
+button {
+    padding: 8px 16px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
