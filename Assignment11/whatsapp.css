@@ -59,12 +59,12 @@ body {
   font-size: large;
 }
 #txt1{
-
+width: 90%;
     padding: 10px; 
     border: 1px solid #ddd;
     border-radius: 20px;
     background: #f8f8f8;
-max-width: fit-content;
+min-width: max-content;
 }
 
 .contacts {
@@ -178,7 +178,7 @@ max-width: fit-content;
   border: 1px solid #ddd;
   border-radius: 20px;
   font-size: 16px;
-  outline: none;
+  min-width: fit-content;
 }
 button {
   margin-left: 10px;
