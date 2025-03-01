@@ -1,0 +1,34 @@
+.paragraph{
+    border: 1px solid black;
+    animation: a1 3s infinite;
+    width: 100;
+   
+  
+}
+@keyframes a1{
+
+    0%{
+        transform:translate(0,0) ;
+    }
+    30%{
+        transform:translate(20px,10px) ;
+    }
+    60%{
+        transform:rotate(90deg);
+    }
+    80%{
+        transform:scale(2,2);
+    }
+    
+}
+
+.paragraph1{
+    transition: width 2s;
+    border: 1px solid black;
+   margin-top: 200px;
+   width: 100px;
+
+}
+.paragraph1:hover{
+    width: 200px;
+}
