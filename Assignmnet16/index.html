@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NASA Navbar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" id="roboto-subset.css-css" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5" type="text/css" media="all">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+ <style>
+  *{
+    box-sizing: border-box;
+  }
+    .navbar {
+      background-color: black;
+    }
+    .navbar-brand img {
+      height: 40px;
+    }
+    .navbar-nav .nav-link, .navbar-toggler {
+      color: white;
+    }
+    .search-box {
+      background-color: black;
+      border: 1px solid white;
+      color: white;
+      padding: 5px;
+      border-radius: 4px;
+      width: 200px; /* Adjust width as needed */
+    }
+    .live {
+      color: red;
+      border: 1px solid red;
+      padding: 2px 4px;
+      font-size: 12px;
+      border-radius: 4px;
+    }
+    /* Hide logo when the collapse is open */
+    #navbarContent.show + .navbar-brand {
+      display: none;
+    }
+    .heading{
+
+      margin-top: 10px;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid position-relative">
+      <!-- Toggler Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+              aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Collapsible Content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav w-100 d-flex flex-column flex-lg-row align-items-center">
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="exploreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Explore
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="exploreDropdown">
+              <li><a class="dropdown-item" href="#">Missions</a></li>
+              <li><a class="dropdown-item" href="#">Galleries</a></li>
+              <li><a class="dropdown-item" href="#">About NASA</a></li>
+              <li><a class="dropdown-item" href="#">Technology</a></li>
+              <li><a class="dropdown-item" href="#">Science</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <input type="text" class="form-control search-box" placeholder="Search...">
+          </li>
+          <li class="nav-item ms-lg-auto">
+            <a class="nav-link" href="#">News &amp; Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Multimedia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">NASA+ <span class="live">LIVE</span></a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Centered Logo (placed after collapse for CSS sibling selection) -->
+      <a class="navbar-brand position-absolute start-50 translate-middle-x" href="#">
+        <img src="nasa-logo.svg" alt="Logo">
+      </a>
+      
+    </div>
+  </nav>
+
+  <!--        section1         -->
+<div class="container-fluid">
+  <div class="heading">
+<h2>Featured News</h2>
+<h4>More NASA News</h4>
+</div>
+<div class="container my-4">
+  <div class="row g-4 align-items-stretch">
+    <!-- العمود الأول: صورة كبيرة -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <img src="1.webp" class="card-img-top img-fluid h-100 object-fit-cover" alt="Large Image">
+      </div>
+    </div>
+    <!-- العمود الثاني: صورة طويلة تمتد كامل الارتفاع -->
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="2.webp" class="card-img-top img-fluid h-100 object-fit-cover" alt="Tall Image">
+      </div>
+    </div>
+    <!-- العمود الثالث: صورتان مكدستان تتساوى أفرادهما الارتفاع -->
+    <div class="col-md-3 d-flex flex-column g-3">
+      <div class="card flex-fill border-0 mb-2">
+        <img src="3.webp" class="card-img-top img-fluid h-100 object-fit-cover" alt="Small Image 1">
+      </div>
+      <div class="card flex-fill border-0">
+        <img src="4.jpg" class="card-img-top img-fluid h-100 object-fit-cover" alt="Small Image 2">
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!--     end    section1         -->
+
+
+<!--        section2         -->
+<section class="container-fluid mb-5 bg-black">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-12 text-white d-flex flex-column align-items-start justify-content-center">
+        <h4>Seeking Moon Mascot</h4>
+        <p>
+          NASA is seeking design ideas from global creators for a zero-gravity 
+          indicator that will fly aboard the agency’s Artemis II test flight. This 
+          opportunity asks for original designs representing the significance of
+          NASA’s Artemis campaign, the mission, or exploration and discovery.
+        </p>
+        <!-- استبدلت btn-blake بـ btn-dark لتوافق Bootstrap -->
+        <button class="btn btn-dark text-white">Design Challenge Details</button>
+      </div>
+
+      <div class="col-lg-8 col-sm-12 mt-4">
+        <!-- استخدام Bootstrap Ratio لجعل الفيديو متجاوباً -->
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/75P6zZmTyFQ?si=_IcrAWLHgXV0aRNX" 
+                  title="YouTube video player" frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!--     end    section2         -->
+
+
+<!--         section3         -->
+
+<section class="container-fluid mb-5">
+  <div class="conainer-fluid">
+    <h1>More NASA Images</h1><br><br>
+    <div class="row">
+      <div class="col-lg-4 col-sm-12">
+        <div class="d-flex flex-row gap-1  ">
+          <img src="https://www.nasa.gov/image-detail/alaska-kachemakbay-oli-20240920-lrg/" width="250px" height="200" class="mb-2">
+          <div class="d-flex gap-1 flex-column ml-2 ">
+            <img src="https://www.nasa.gov/image-detail/etnaeruption-oli-20250213-lrg/" width="150px" height="98" class="me-2">
+            <img src="https://www.nasa.gov/image-detail/himalayasnow-oli2-20220128-lrg/" width="150px" height="98">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-12">
+        <div class="d-flex flex-row gap-1  ">
+          <img src="https://www.nasa.gov/image-detail/alaska-kachemakbay-oli-20240920-lrg/" width="250px" height="200" class="mb-2">
+          <div class="d-flex gap-1 flex-column ml-2 ">
+            <img src="https://www.nasa.gov/image-detail/etnaeruption-oli-20250213-lrg/" width="150px" height="98" class="me-2">
+            <img src="https://www.nasa.gov/image-detail/himalayasnow-oli2-20220128-lrg/" width="150px" height="98">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-12">
+        <div class="d-flex flex-row gap-1  ">
+          <img src="https://www.nasa.gov/image-detail/alaska-kachemakbay-oli-20240920-lrg/" width="250px" height="200" class="mb-2">
+          <div class="d-flex gap-1 flex-column ml-2 ">
+            <img src="https://www.nasa.gov/image-detail/etnaeruption-oli-20250213-lrg/" width="150px" height="98" class="me-2">
+            <img src="https://www.nasa.gov/image-detail/himalayasnow-oli2-20220128-lrg/" width="150px" height="98">
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  
+  </div>
+</section>
+
+<!--     end    section3         -->
+
+
+<!--        section4        -->
+
+<section class="container-fluid mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-12 d-flex flex-column align-items-start justify-content-center flex-wrap">
+        <h4>Image Of The Day</h4>
+        <p>
+          NASA Astronaut Tracy Dyson Speaks to Students. NASA astronaut Tracy Dyson points to the Expedition 71 patch on her flight suit as she answers a question from students, Wednesday, March 5, 2025, at Elsie Whitlow Stokes Community Freedom Public Charter School in Washington.
+          Dyson and fellow crewmates Matthew Dominick, Michael Barratt, and Jeanette Epps served as part of Expedition 71 aboard the International Space Station.
+        </p>
+        <!-- استبدلت btn-blake بـ btn-dark لتوافق Bootstrap -->
+        <button class="btn btn-dark">Browse Image Archive</button>
+      </div>
+      <div class="col-lg-8 col-sm-12 mt-4 bg-light">
+        <!-- استخدام img-fluid لجعل الصورة متجاوبة -->
+        <img src="1.webp" class="img-fluid" alt="Image of the Day">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--     end    section4         -->
+
+<!--       section5        -->
+<section  class="container-fluid mb-5">
+  <div class="container-fluid">
+    <h1>More Topics from NASA</h1><br><br>
+  <div class="row  mb-5 g-3">
+    <div class="col-lg-3 col-sm-12 ">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-12 ">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-3 col-sm-12 ">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-3 col-sm-12 ">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-5 g-3">
+    <div class="col-lg-3 col-sm-12">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-12">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-3 col-sm-12">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-3 col-sm-12">
+      <div class="card bg-dark text-white border-0">
+        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text">3 MIN READ</p>
+          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+</section>
+
+
+
+<!--     end    section5         -->
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-black text-light">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Get connected with us on social networks:</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>Company name
+          </h6>
+          <p>
+            Here you can use rows and columns to organize your footer content. Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Angular</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">React</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Vue</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Laravel</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Pricing</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Settings</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Orders</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Help</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            info@example.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+          <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2021 Copyright:
+    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
