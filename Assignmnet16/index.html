@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NASA Navbar</title>
+  <title>NASA </title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" id="roboto-subset.css-css" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5" type="text/css" media="all">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="nasa-logo.svg">
+
  <style>
   *{
     box-sizing: border-box;
@@ -26,7 +28,7 @@
       color: white;
       padding: 5px;
       border-radius: 4px;
-      width: 200px; /* Adjust width as needed */
+      width: 200px; 
     }
     .live {
       color: red;
@@ -35,7 +37,6 @@
       font-size: 12px;
       border-radius: 4px;
     }
-    /* Hide logo when the collapse is open */
     #navbarContent.show + .navbar-brand {
       display: none;
     }
@@ -51,13 +52,14 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid position-relative">
-      <!-- Toggler Button -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-              aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+       data-bs-target="#navbarContent"
+              aria-controls="navbarContent"
+               aria-expanded="false" 
+               aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       
-      <!-- Collapsible Content -->
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav w-100 d-flex flex-column flex-lg-row align-items-center">
           <li class="nav-item">
@@ -87,7 +89,6 @@
         </ul>
       </div>
       
-      <!-- Centered Logo (placed after collapse for CSS sibling selection) -->
       <a class="navbar-brand position-absolute start-50 translate-middle-x" href="#">
         <img src="nasa-logo.svg" alt="Logo">
       </a>
@@ -96,47 +97,86 @@
   </nav>
 
   <!--        section1         -->
-<div class="container-fluid">
+<div class="container">
   <div class="heading">
 <h2>Featured News</h2>
 <h4>More NASA News</h4>
 </div>
 <div class="container my-4">
-  <div class="row g-4 align-items-stretch">
-    <!-- العمود الأول: صورة كبيرة -->
+  <div class="row g-4">
     <div class="col-md-6">
       <div class="card h-100">
-        <img src="1.webp" class="card-img-top img-fluid h-100 object-fit-cover" alt="Large Image">
+        <img src="1.webp" class="card-img-top h-100" alt="Large Image">
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text bg-dark bg-opacity-25 text-light">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25 text-light">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
       </div>
+     
     </div>
-    <!-- العمود الثاني: صورة طويلة تمتد كامل الارتفاع -->
     <div class="col-md-3">
       <div class="card h-100">
-        <img src="2.webp" class="card-img-top img-fluid h-100 object-fit-cover" alt="Tall Image">
+        <img src="2.webp" class="card-img-top  h-100" alt="Tall Image">
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text bg-dark bg-opacity-25 text-light">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25 text-light">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
       </div>
     </div>
-    <!-- العمود الثالث: صورتان مكدستان تتساوى أفرادهما الارتفاع -->
-    <div class="col-md-3 d-flex flex-column g-3">
-      <div class="card flex-fill border-0 mb-2">
-        <img src="3.webp" class="card-img-top img-fluid h-100 object-fit-cover" alt="Small Image 1">
+    <div class="col-md-3 d-flex flex-column">
+      <div class="card flex-fill border-0 mb-3">
+        <img src="3.webp" class="card-img-top"
+         >
+         <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text bg-dark bg-opacity-25 text-s text-light">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25 text-light">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
       </div>
-      <div class="card flex-fill border-0">
-        <img src="4.jpg" class="card-img-top img-fluid h-100 object-fit-cover" alt="Small Image 2">
+      <div class="card flex-fill border-0 ">
+        <img src="4.webp" class="card-img-top" alt="Small Image 2">
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text bg-dark bg-opacity-25 text-s text-light">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25 text-light">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<div class="container ">
+<div class="row mt-3 mb-3">
+  <div class="col-lg-3 col-sm-12 d-flex align-items-center ">
+    <img src="https://images-assets.nasa.gov/image/jsc2024e077921/jsc2024e077921~large.jpg?w=1920&h=1536&fit=clip&crop=faces%2Cfocalpoint"  class="rounded-circle d-inline float-left" width="85 px" height="85px" >
+    <h6 class="d-inline ms-3">NASA Successfully Acquires GPS Signals on Moon</h6>
+  </div>
+  <div class="col-lg-3 col-sm-12 d-flex align-items-center ">
+    <img src=
+    "https://www.nasa.gov/wp-content/uploads/2025/03/saw4-close-w-cover.jpg?resize=150,150"  class="rounded-circle d-inline float-left" width="85 px" height="85px" >
+    <h6 class="d-inline ms-3">NASA Successfully Acquires GPS Signals on Moon</h6>
+  </div>
+  <div class="col-lg-3 col-sm-12 d-flex align-items-center ">
+    <img src="https://images-assets.nasa.gov/image/NHQ202409280015/NHQ202409280015~large.jpg?w=1536&h=941&fit=crop&crop=faces%2Cfocalpoint"  class="rounded-circle d-inline float-left" width="85 px" height="85px" >
+    <h6 class="d-inline ms-3">NASA Successfully Acquires GPS Signals on Moon</h6>
+  </div>
+  <div class="col-lg-3 col-sm-12 d-flex align-items-center ">
+    <img src=
+    "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar-system/skywatching/2025/march/Lunar_eclipse_credit_Preston%20Dyches_CC_BY-NC_2.0.jpg"  class="rounded-circle d-inline float-left" width="85 px" height="85px" >
+    <h6 class="d-inline ms-3">NASA Successfully Acquires GPS Signals on Moon</h6>
+  </div>
 
+ </div>
+</div>
+</div>
 </div>
 
 <!--     end    section1         -->
 
 
 <!--        section2         -->
-<section class="container-fluid mb-5 bg-black">
+<section class="container-fluid mb-5 pb-3 bg-black">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4 col-sm-12 text-white d-flex flex-column align-items-start justify-content-center">
+      <div class="col-lg-4 col-sm-12 
+      text-white d-flex flex-column align-items-start justify-content-center">
         <h4>Seeking Moon Mascot</h4>
         <p>
           NASA is seeking design ideas from global creators for a zero-gravity 
@@ -144,12 +184,10 @@
           opportunity asks for original designs representing the significance of
           NASA’s Artemis campaign, the mission, or exploration and discovery.
         </p>
-        <!-- استبدلت btn-blake بـ btn-dark لتوافق Bootstrap -->
         <button class="btn btn-dark text-white">Design Challenge Details</button>
       </div>
 
       <div class="col-lg-8 col-sm-12 mt-4">
-        <!-- استخدام Bootstrap Ratio لجعل الفيديو متجاوباً -->
         <div class="ratio ratio-16x9">
           <iframe src="https://www.youtube.com/embed/75P6zZmTyFQ?si=_IcrAWLHgXV0aRNX" 
                   title="YouTube video player" frameborder="0" 
@@ -169,35 +207,40 @@
 <!--         section3         -->
 
 <section class="container-fluid mb-5">
-  <div class="conainer-fluid">
+  <div class="container-fluid ">
     <h1>More NASA Images</h1><br><br>
-    <div class="row">
-      <div class="col-lg-4 col-sm-12">
-        <div class="d-flex flex-row gap-1  ">
-          <img src="https://www.nasa.gov/image-detail/alaska-kachemakbay-oli-20240920-lrg/" width="250px" height="200" class="mb-2">
-          <div class="d-flex gap-1 flex-column ml-2 ">
-            <img src="https://www.nasa.gov/image-detail/etnaeruption-oli-20250213-lrg/" width="150px" height="98" class="me-2">
-            <img src="https://www.nasa.gov/image-detail/himalayasnow-oli2-20220128-lrg/" width="150px" height="98">
+    <div class="row justify-content-center g-3 ">
+      <div class="col-lg-4 col-sm-12 center ">
+        <div class="d-flex flex-row gap-1 ">
+          <img src="https://www.nasa.gov/wp-content/uploads/2025/02/alaska-kachemakbay-oli-20240920-lrg.jpg?resize=300,250" width="250px" height="200" class="mb-2">
+          <div class="d-flex  img-fluid gap-1 flex-column ml-2 ">
+            <img src="https://www.nasa.gov/wp-content/uploads/2025/02/etnaeruption-oli-20250213-lrg.jpg?resize=300,200" width="150px" height="98" class="me-2">
+            <img src="https://www.nasa.gov/wp-content/uploads/2025/02/himalayasnow-oli2-20220128-lrg.jpg?resize=300,200" width="150px" height="98">
           </div>
         </div>
+        <p class="fw-bold">Earth Gallery</p>
       </div>
       <div class="col-lg-4 col-sm-12">
         <div class="d-flex flex-row gap-1  ">
-          <img src="https://www.nasa.gov/image-detail/alaska-kachemakbay-oli-20240920-lrg/" width="250px" height="200" class="mb-2">
+
+ <img src="https://www.nasa.gov/wp-content/uploads/2024/11/iss072e186870.jpg?resize=300,200" width="250px" height="200" class="mb-2">
           <div class="d-flex gap-1 flex-column ml-2 ">
-            <img src="https://www.nasa.gov/image-detail/etnaeruption-oli-20250213-lrg/" width="150px" height="98" class="me-2">
-            <img src="https://www.nasa.gov/image-detail/himalayasnow-oli2-20220128-lrg/" width="150px" height="98">
+            <img src="https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001515/GSFC_20171208_Archive_e001515~orig.jpg?w=560&h=560&fit=crop&crop=faces%2Cfocalpoint" width="150px" height="98" class="me-2">
+            <img src="https://images-assets.nasa.gov/image/201103200001HQ/201103200001HQ~medium.jpg?w=1280&h=851&fit=crop&crop=faces%2Cfocalpoint" width="150px" height="98">
           </div>
         </div>
+        <p class="fw-bold">Moon gallery</p>
       </div>
       <div class="col-lg-4 col-sm-12">
         <div class="d-flex flex-row gap-1  ">
-          <img src="https://www.nasa.gov/image-detail/alaska-kachemakbay-oli-20240920-lrg/" width="250px" height="200" class="mb-2">
+          <img src="https://images-assets.nasa.gov/image/sts111-321-024/sts111-321-024~large.jpg?w=1536&h=1014&fit=crop&crop=faces%2Cfocalpoint" width="250px" height="200" class="mb-2">
           <div class="d-flex gap-1 flex-column ml-2 ">
-            <img src="https://www.nasa.gov/image-detail/etnaeruption-oli-20250213-lrg/" width="150px" height="98" class="me-2">
-            <img src="https://www.nasa.gov/image-detail/himalayasnow-oli2-20220128-lrg/" width="150px" height="98">
+            <img src="https://www.nasa.gov/wp-content/uploads/2024/06/SDO_131_June-10-2024_1000-1133UTC.gif?w=300" width="150px" height="98" class="me-2">
+            <img src="https://www.nasa.gov/wp-content/uploads/2024/05/sdo_may_27_flare0700ut_171-304_earthscale_720.jpg?resize=300,300" width="150px" height="98">
           </div>
+         
         </div>
+        <p class="fw-bold">sun gallery</p>
       </div>
      
     </div>
@@ -219,12 +262,10 @@
           NASA Astronaut Tracy Dyson Speaks to Students. NASA astronaut Tracy Dyson points to the Expedition 71 patch on her flight suit as she answers a question from students, Wednesday, March 5, 2025, at Elsie Whitlow Stokes Community Freedom Public Charter School in Washington.
           Dyson and fellow crewmates Matthew Dominick, Michael Barratt, and Jeanette Epps served as part of Expedition 71 aboard the International Space Station.
         </p>
-        <!-- استبدلت btn-blake بـ btn-dark لتوافق Bootstrap -->
         <button class="btn btn-dark">Browse Image Archive</button>
       </div>
       <div class="col-lg-8 col-sm-12 mt-4 bg-light">
-        <!-- استخدام img-fluid لجعل الصورة متجاوبة -->
-        <img src="1.webp" class="img-fluid" alt="Image of the Day">
+        <img src="https://www.nasa.gov/wp-content/uploads/2025/03/nhq202503050025orig.jpg?resize=1536,1087" class="img-fluid" alt="Image of the Day">
       </div>
     </div>
   </div>
@@ -240,39 +281,39 @@
   <div class="row  mb-5 g-3">
     <div class="col-lg-3 col-sm-12 ">
       <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <img src="https://www.nasa.gov/wp-content/uploads/2023/02/gateway-with-earth-in-background.webp?w=2048" height="400px" class="card-img" alt="Stony Beach"/>
         <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+          <p class="card-text bg-dark bg-opacity-25">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25">NASA Successfully Acquires GPS Signals on Moon.</h5>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-sm-12 ">
       <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <img src="https://science.nasa.gov/wp-content/uploads/2023/10/edu-solar-system-large.png?w=1024" height="400px" class="card-img" alt="Stony Beach"/>
         <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-lg-3 col-sm-12 ">
-      <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+          <p class="card-text bg-dark bg-opacity-25">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25">NASA Successfully Acquires GPS Signals on Moon.</h5>
         </div>
       </div>
 
     </div>
     <div class="col-lg-3 col-sm-12 ">
       <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <img src="https://www.nasa.gov/wp-content/uploads/2022/12/51476067951-e10dfb6875-o.jpg" height="400px" class="card-img" alt="Stony Beach"/>
         <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+          <p class="card-text bg-dark bg-opacity-25">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-3 col-sm-12 ">
+      <div class="card bg-dark text-white border-0">
+        <img src="https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW9vbiUyMG5hc2F8ZW58MHx8MHx8fDA%3D" height="400px" class="card-img" alt="Stony Beach"/>
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text bg-dark bg-opacity-25">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25">NASA Successfully Acquires GPS Signals on Moon.</h5>
         </div>
       </div>
     </div>
@@ -280,39 +321,43 @@
   <div class="row mb-5 g-3">
     <div class="col-lg-3 col-sm-12">
       <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <img src="https://hips.hearstapps.com/hmg-prod/images/black-hole-seen-from-a-planet-illustration-royalty-free-illustration-1736172910.pjpeg?crop=0.61977xw:1xh;center,top&resize=640:*" height="400px" class="card-img" alt="Stony Beach"/>
         <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+          <p class="card-text bg-dark bg-opacity-25">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25">NASA Successfully Acquires GPS Signals on Moon.</h5>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-sm-12">
       <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <img src="https://media.istockphoto.com/id/876612100/photo/reflection-of-planet-earth-in-solar-panels-of-a-space-satellite.jpg?s=612x612&w=0&k=20&c=u99N0EJgxWL_ppNchbTpl_ClVGUAwQq7bfIH3WxN_eY=" height="400px" class="card-img" alt="Stony Beach"/>
         <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-lg-3 col-sm-12">
-      <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+          <p class="card-text  bg-dark bg-opacity-25">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25">NASA Successfully Acquires GPS Signals on Moon.</h5>
         </div>
       </div>
 
     </div>
     <div class="col-lg-3 col-sm-12">
       <div class="card bg-dark text-white border-0">
-        <img src="1.webp" height="400px" class="card-img" alt="Stony Beach"/>
+        <img src="https://images.pexels.com/photos/41162/moon-landing-apollo-11-nasa-buzz-aldrin-41162.jpeg?cs=srgb&dl=pexels-pixabay-41162.jpg&fm=jpg"
+         height="400px" class="card-img" alt="Stony Beach"/>
         <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <p class="card-text">3 MIN READ</p>
-          <h5 class="card-text">NASA Successfully Acquires GPS Signals on Moon.</h5>
+          <p class="card-text bg-dark bg-opacity-25 ">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25">NASA Successfully Acquires GPS Signals on Moon.</h5>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-3 col-sm-12">
+      <div class="card bg-dark text-white border-0 ">
+        <img src="https://media.istockphoto.com/id/1364398448/photo/communication-technology-with-connections-around-earth-viewed-from-space-internet-iot.jpg?s=612x612&w=0&k=20&c=0BiRVD98WwnghQ-KYmoCSaZe2MLe__7fEERWo7LJ9jQ="
+        height="400px" class="card-img" 
+        alt="Pillars of Creation in the Eagle Nebula" >
+   
+        <div class="card-img-overlay d-flex flex-column justify-content-end">
+          <p class="card-text bg-dark bg-opacity-25 ">3 MIN READ</p>
+          <h5 class="card-text bg-dark bg-opacity-25 ">NASA Successfully Acquires GPS Signals on Moon.</h5>
         </div>
       </div>
     </div>
@@ -330,13 +375,17 @@
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-black text-light">
   <!-- Section: Social media -->
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+  <section class="d-flex justify-content-center justify-content-lg-between
+   p-4 border-bottom">
     <!-- Left -->
     <div class="me-5 d-none d-lg-block">
       <span>Get connected with us on social networks:</span>
     </div>
     <!-- Left -->
-
+    <a class="navbar-brand position-absolute start-50 translate-middle-x" href="#">
+      <img src="nasa-logo.svg" alt="Logo">
+    </a>
+    
     <!-- Right -->
     <div>
       <a href="" class="me-4 text-reset">
@@ -371,11 +420,11 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>Company name
+            <i class="fas fa-gem me-3"></i>NASA
           </h6>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+            NASA explores the unknown in air and space,
+             innovates for the benefit of humanity, and inspires the world through discovery.
           </p>
         </div>
         <!-- Grid column -->
@@ -387,16 +436,16 @@
             Products
           </h6>
           <p>
-            <a href="#!" class="text-reset">Angular</a>
+            <a href="#!" class="text-reset">Home</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">React</a>
+            <a href="#!" class="text-reset">News & Events</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Vue</a>
+            <a href="#!" class="text-reset">Nasa+</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Laravel</a>
+            <a href="#!" class="text-reset">Missions</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -443,8 +492,8 @@
 
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    © 2025 Copyright:
+    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">Nasa.com</a>
   </div>
   <!-- Copyright -->
 </footer>
