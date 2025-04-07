@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculater</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+    .calculator {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    #display {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      text-align: right;
+      padding: 5px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      gap: 10px;
+    }
+    .buttons button {
+      padding: 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="text" id="display" disabled />
+    <div class="buttons">
+      <button id="btn7">7</button>
+      <button id="btn8">8</button>
+      <button id="btn9">9</button>
+      <button id="btnDiv">/</button>
+
+      <button id="btn4">4</button>
+      <button id="btn5">5</button>
+      <button id="btn6">6</button>
+      <button id="btnMul">*</button>
+
+      <button id="btn1">1</button>
+      <button id="btn2">2</button>
+      <button id="btn3">3</button>
+      <button id="btnMin">-</button>
+
+      <button id="btn0">0</button>
+      <button id="btnRim">%</button>
+      <button id="btnEq">=</button>
+      <button id="btnPls">+</button>
+
+      <button id="btnClr" style="grid-column: span 4; background: #f88;">C</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+
+</body>
+</html>
