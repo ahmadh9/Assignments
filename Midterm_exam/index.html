@@ -20,7 +20,9 @@
         </button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview" type="button" role="tab" aria-controls="preview" aria-selected="false">
+        <button class="nav-link" id="preview-tab" 
+        data-bs-toggle="tab" data-bs-target="#preview"
+         type="button" role="tab" aria-controls="preview" aria-selected="false">
             Preview Users
         </button>
         </li>
@@ -28,25 +30,26 @@
 
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="add" role="tabpanel" aria-labelledby="add-tab">
+            <div id="error" class="alert alert-danger d-none"></div>
         <form id="userForm">
             <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" class="form-control" required>
+            <input type="email" id="email" class="form-control" >
             </div>
 
             <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" class="form-control" required>
+            <input type="text" id="name" class="form-control" >
             </div>
 
             <div class="mb-3">
             <label for="phone" class="form-label">Phone Number</label>
-            <input type="tel" id="phone" class="form-control" minlength="10" required>
+            <input type="tel" id="phone" class="form-control" minlength="10" >
             </div>
 
             <div class="mb-3">
             <label class="form-label">Gender</label>
-            <select id="gender" class="form-select" required>
+            <select id="gender" class="form-select" >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -55,7 +58,7 @@
 
             <div class="mb-3">
             <label for="address" class="form-label">Address</label>
-            <textarea id="address" class="form-control" required></textarea>
+            <textarea id="address" class="form-control" ></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Add User</button>
