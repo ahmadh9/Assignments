@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>new article!</title>
+  <link rel="stylesheet" href="/styles/style.css">
+
+</head>
+<body>
+  <h1>Create New Article!</h1>
+
+  <form action="/posts" method="POST">
+    <input type="text" name="title" placeholder="Article title" required>
+    <br><br>
+    <textarea name="content"
+     rows="5" placeholder="Contents..." required></textarea>
+    <br><br>
+    <button type="submit">Publish</button>
+  </form>
+
+  <a href="/">HomePage</a>
+</body>
+</html>
