@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <title>My Blog</title>
   <link rel="stylesheet" href="/styles/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>My Blog</h1>
-    <a href="/new"><button class="btn">New Post</button></a>
+    <h1 class="title">My Blog</h1>
+    <a href="/new"><button class="btn new">New Post</button></a>
 
     <% posts.forEach(post => { %>
       <div class="post">
@@ -19,11 +20,10 @@
 
         <div class="actions">
           <form action="/edit/<%= post.id %>" method="get" style="display:inline;">
-            <button class="edit">Edit</button>
+            <button class="btn edit">Edit</button>
           </form>
-
           <form action="/delete/<%= post.id %>" method="post" style="display:inline;">
-            <button class="delete">Delete</button>
+            <button class="btn delete">Delete</button>
           </form>
         </div>
       </div>
