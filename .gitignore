@@ -4,3 +4,4 @@ node_modules/
 *.tmp
 qr_image.png
 URL.txt
+.env
