@@ -9,6 +9,18 @@ import userRoutes from './routes/userRoutes.js';
 import './config/passport.js'; 
 import authRoutes from './routes/authRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
+import enrollmentRoutes from './routes/enrollmentRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import moduleRoutes from './routes/moduleRoutes.js';
+import lessonRoutes from './routes/lessonRoutes.js';
+import quizRoutes from './routes/quizRoutes.js';
+import assignmentRoutes from './routes/assignmentRoutes.js';
+import fileRoutes from './routes/fileRoutes.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -17,6 +29,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(
   session({
@@ -32,6 +45,13 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/enrollments', enrollmentRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/modules', moduleRoutes);
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/quizzes', quizRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use('/api/files', fileRoutes);
 
 // Test route
 app.get('/api/test', async (req, res) => {
