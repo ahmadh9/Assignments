@@ -2,41 +2,53 @@
 import multer from 'multer';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename)
+const __dirname = path.dirname(__filename);
+
+// التأكد من وجود المجلدات
+const ensureDirectoryExists = (dirPath) => {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+};
+
+// إنشاء المجلدات الأساسية
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+ensureDirectoryExists(uploadsDir);
+ensureDirectoryExists(path.join(uploadsDir, 'avatars'));
+ensureDirectoryExists(path.join(uploadsDir, 'assignments'));
+ensureDirectoryExists(path.join(uploadsDir, 'thumbnails'));
+ensureDirectoryExists(path.join(uploadsDir, 'misc'));
 
 // إعداد مجلد التخزين
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // تحديد المجلد حسب نوع الملف
-    let uploadPath = 'uploads/';
+    let uploadPath = path.join(__dirname, '..', 'uploads');
     
     if (file.fieldname === 'avatar') {
-      uploadPath += 'avatars/';
-      uploadFolder = path.join(__dirname, '../uploads/avatars');
+      uploadPath = path.join(uploadPath, 'avatars');
     } else if (file.fieldname === 'assignment') {
-
-      uploadPath += 'assignments/';
-    uploadFolder = path.join(__dirname, '../uploads/assignments');
+      uploadPath = path.join(uploadPath, 'assignments');
     } else if (file.fieldname === 'courseThumbnail') {
-      uploadPath += 'thumbnails/';
-    uploadFolder = path.join(__dirname, '../uploads/thumbnails');
+      uploadPath = path.join(uploadPath, 'thumbnails');
     } else {
-      uploadPath += 'misc/';
-            uploadFolder = path.join(__dirname, '../uploads/misc');
+      uploadPath = path.join(uploadPath, 'misc');
     }
     
+    // تأكد من وجود المجلد
+    ensureDirectoryExists(uploadPath);
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
-    // توليد اسم فريد للملف
-    const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+    // الحفاظ على امتداد الملف الأصلي
+    const ext = path.extname(file.originalname);
+    const uniqueName = `${uuidv4()}${ext}`;
     cb(null, uniqueName);
   }
 });
-
 // فلترة أنواع الملفات
 const fileFilter = (req, file, cb) => {
   const allowedMimes = {

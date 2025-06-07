@@ -16,6 +16,11 @@ import lessonRoutes from './routes/lessonRoutes.js';
 import quizRoutes from './routes/quizRoutes.js';
 import assignmentRoutes from './routes/assignmentRoutes.js';
 import fileRoutes from './routes/fileRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
+import searchRoutes from './routes/searchRoutes.js';
+import progressRoutes from './routes/progressRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -42,7 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routes
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/enrollments', enrollmentRoutes);
@@ -52,6 +57,10 @@ app.use('/api/lessons', lessonRoutes);
 app.use('/api/quizzes', quizRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/files', fileRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/search', searchRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Test route
 app.get('/api/test', async (req, res) => {

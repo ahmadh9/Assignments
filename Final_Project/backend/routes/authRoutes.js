@@ -3,6 +3,7 @@ import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import pool from '../config/db.js';
+import { authenticateToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -162,5 +163,52 @@ router.post('/logout', (req, res) => {
   // لكن يمكننا إضافة التوكن لـ blacklist إذا أردنا
   res.json({ message: '✅ Logged out successfully' });
 });
+// الملف الشخصي
+router.get('/profile', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    
+    const user = await pool.query(
+      'SELECT id, name, email, role, avatar, created_at FROM users WHERE id = $1',
+      [userId]
+    );
 
+    if (user.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      message: '✅ Profile fetched',
+      user: user.rows[0]
+    });
+  } catch (err) {
+    console.error('❌ Get profile error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// تحديث الملف الشخصي
+router.put('/profile', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { name, avatar } = req.body;
+
+    const result = await pool.query(
+      `UPDATE users 
+       SET name = COALESCE($1, name),
+           avatar = COALESCE($2, avatar)
+       WHERE id = $3
+       RETURNING id, name, email, role, avatar`,
+      [name, avatar, userId]
+    );
+
+    res.json({
+      message: '✅ Profile updated',
+      user: result.rows[0]
+    });
+  } catch (err) {
+    console.error('❌ Update profile error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 export default router;

@@ -59,27 +59,12 @@ export const createAssignment = async (req, res) => {
   }
 };
 
-// الحصول على واجب الدرس
 export const getLessonAssignment = async (req, res) => {
   try {
     const { lessonId } = req.params;
     const userId = req.user?.id;
 
-    // التحقق من التسجيل (للطلاب)
-    if (userId && req.user.role === 'student') {
-      const enrollmentCheck = await pool.query(
-        `SELECT e.* FROM enrollments e
-         JOIN modules m ON m.course_id = e.course_id
-         JOIN lessons l ON l.module_id = m.id
-         WHERE l.id = $1 AND e.user_id = $2`,
-        [lessonId, userId]
-      );
-
-      if (enrollmentCheck.rows.length === 0) {
-        return res.status(403).json({ error: 'Not enrolled in this course' });
-      }
-    }
-
+    // جلب الواجب أولاً
     const assignment = await pool.query(
       'SELECT * FROM assignments WHERE lesson_id = $1',
       [lessonId]
@@ -89,20 +74,60 @@ export const getLessonAssignment = async (req, res) => {
       return res.status(404).json({ error: 'No assignment found for this lesson' });
     }
 
-    // إذا كان طالب، تحقق من تسليمه السابق
-    let submission = null;
+    // التحقق من التسجيل (للطلاب فقط)
     if (userId && req.user.role === 'student') {
+      const enrollmentCheck = await pool.query(
+        `SELECT DISTINCT e.* 
+         FROM enrollments e
+         JOIN courses c ON e.course_id = c.id
+         JOIN modules m ON m.course_id = c.id
+         JOIN lessons l ON l.module_id = m.id
+         WHERE l.id = $1 AND e.user_id = $2`,
+        [lessonId, userId]
+      );
+
+      if (enrollmentCheck.rows.length === 0) {
+        // معلومات للتشخيص
+        const debugInfo = await pool.query(`
+          SELECT 
+            l.id as lesson_id,
+            m.course_id,
+            c.title as course_title
+          FROM lessons l
+          JOIN modules m ON l.module_id = m.id
+          JOIN courses c ON m.course_id = c.id
+          WHERE l.id = $1
+        `, [lessonId]);
+        
+        console.log('Enrollment check failed:', {
+          lessonId,
+          userId,
+          courseInfo: debugInfo.rows[0]
+        });
+        
+        return res.status(403).json({ 
+          error: 'Not enrolled in this course',
+          hint: 'Make sure you are enrolled in the course containing this lesson'
+        });
+      }
+
+      // تحقق من تسليم سابق
       const submissionCheck = await pool.query(
         'SELECT * FROM submissions WHERE assignment_id = $1 AND user_id = $2',
         [assignment.rows[0].id, userId]
       );
-      submission = submissionCheck.rows[0] || null;
+      
+      return res.json({
+        message: '✅ Assignment fetched',
+        assignment: assignment.rows[0],
+        submission: submissionCheck.rows[0] || null
+      });
     }
 
+    // للمدرسين والأدمن
     res.json({
       message: '✅ Assignment fetched',
-      assignment: assignment.rows[0],
-      submission
+      assignment: assignment.rows[0]
     });
 
   } catch (err) {
