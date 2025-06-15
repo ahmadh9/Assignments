@@ -31,22 +31,47 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS configuration - محدث للعمل مع JWT
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['set-cookie']
+};
+
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+// Body parsing middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Session configuration (نحتاجه للـ Google OAuth)
 app.use(
   session({
-    secret: 'lms-secret-key',
+    secret: process.env.SESSION_SECRET || 'lms-secret-key',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // false for development
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      sameSite: 'lax'
+    }
   })
 );
+
+// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-// routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/users', userRoutes);
@@ -72,8 +97,15 @@ app.get('/api/test', async (req, res) => {
     res.status(500).json({ error: 'Database error' });
   }
 });
+
 app.get('/', (req, res) => {
   res.send('✅ API is working');
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
 });
 
 // Start server
