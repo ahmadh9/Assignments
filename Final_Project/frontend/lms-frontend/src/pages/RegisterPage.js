@@ -1,4 +1,3 @@
-// src/pages/RegisterPage.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -12,6 +11,7 @@ import {
   Alert,
   Divider,
   CircularProgress,
+  MenuItem,
 } from '@mui/material';
 import { Google as GoogleIcon } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
@@ -47,8 +47,9 @@ const RegisterPage = () => {
         name: data.name,
         email: data.email,
         password: data.password,
+        role: data.role,
       });
-      
+
       if (result.success) {
         navigate('/dashboard');
       } else {
@@ -125,6 +126,22 @@ const RegisterPage = () => {
               error={!!errors.email}
               helperText={errors.email?.message}
             />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              select
+              name="role"
+              label="Role"
+              defaultValue="student"
+              {...register('role', { required: 'Role is required' })}
+              error={!!errors.role}
+              helperText={errors.role?.message}
+            >
+              <MenuItem value="student">Student</MenuItem>
+              <MenuItem value="instructor">Instructor</MenuItem>
+            </TextField>
 
             <TextField
               margin="normal"

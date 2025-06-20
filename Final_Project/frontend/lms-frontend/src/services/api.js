@@ -4,47 +4,41 @@ import { toast } from 'react-toastify';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-// إنشاء instance من axios
 const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true // للـ cookies و sessions
+  withCredentials: true, // إذا كنت تستخدم الـ cookies/ sessions
 });
 
-// Request interceptor لإضافة التوكن
+// إضافة الـ token أوتوماتيكياً لكل طلب
 api.interceptors.request.use(
-  (config) => {
+  config => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  error => Promise.reject(error)
 );
 
-// Response interceptor للتعامل مع الأخطاء
+// التعامل المركزي مع الأخطاء
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
+  response => response,
+  error => {
     if (error.response) {
-      // الخادم أرسل رد بحالة خطأ
-      switch (error.response.status) {
+      const { status, data } = error.response;
+      switch (status) {
         case 401:
-          // غير مصرح
           localStorage.removeItem('token');
           localStorage.removeItem('user');
+          toast.error('Session expired. Please log in again.');
           window.location.href = '/login';
-          toast.error('Session expired. Please login again.');
           break;
         case 403:
-          toast.error('You do not have permission to perform this action.');
+          toast.error(data.error || 'You do not have permission to perform this action.');
           break;
         case 404:
           toast.error('Requested resource not found.');
@@ -53,17 +47,23 @@ api.interceptors.response.use(
           toast.error('Server error. Please try again later.');
           break;
         default:
-          toast.error(error.response.data.error || 'An error occurred.');
+          // رسالة الخطأ القادمة من الباكند أو رسالة افتراضية
+          toast.error(data.error || 'An unexpected error occurred.');
       }
     } else if (error.request) {
-      // الطلب تم إرساله ولكن لم يتم استلام رد
       toast.error('Network error. Please check your connection.');
     } else {
-      // حدث خطأ في إعداد الطلب
-      toast.error('An error occurred. Please try again.');
+      toast.error('Error setting up request.');
     }
     return Promise.reject(error);
   }
 );
+
+api.interceptors.request.use(config => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  config.withCredentials = true;
+  return config;
+});
 
 export default api;

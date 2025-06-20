@@ -155,9 +155,9 @@ const StudentDashboard = () => {
           >
             <AssignmentIcon sx={{ fontSize: 40, mb: 1 }} />
             <Typography variant="h4">
-              {enrollments.length * 2}
+              {enrollments.reduce((sum, e) => sum + (e.assignments?.length || 0), 0)}
             </Typography>
-            <Typography variant="body2">Total Activities</Typography>
+            <Typography variant="body2">Total Assignments</Typography>
           </Paper>
         </Grid>
       </Grid>
@@ -183,7 +183,7 @@ const StudentDashboard = () => {
       ) : (
         <Grid container spacing={3}>
           {enrollments.map((enrollment) => (
-            <Grid item xs={12} md={6} lg={4} key={enrollment.id}>
+            <Grid item xs={12} md={6} lg={4} key={enrollment.enrollment_id || enrollment.id}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom noWrap>
@@ -218,8 +218,8 @@ const StudentDashboard = () => {
                       label="Completed"
                       color="success"
                       size="small"
-                      sx={{ mt: 1 }}
                       icon={<CheckCircleIcon />}
+                      sx={{ mt: 1 }}
                     />
                   )}
                 </CardContent>
@@ -237,32 +237,6 @@ const StudentDashboard = () => {
             </Grid>
           ))}
         </Grid>
-      )}
-
-      {/* Recent Activity */}
-      {dashboardData?.recentActivity && dashboardData.recentActivity.length > 0 && (
-        <>
-          <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
-            Recent Activity
-          </Typography>
-          <Paper sx={{ p: 2 }}>
-            {dashboardData.recentActivity.map((activity, index) => (
-              <Box
-                key={index}
-                sx={{
-                  p: 2,
-                  borderBottom: index < dashboardData.recentActivity.length - 1 ? 1 : 0,
-                  borderColor: 'divider',
-                }}
-              >
-                <Typography variant="body1">{activity.title}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Progress: {activity.progress}% • {new Date(activity.enrolled_at).toLocaleDateString()}
-                </Typography>
-              </Box>
-            ))}
-          </Paper>
-        </>
       )}
     </Container>
   );

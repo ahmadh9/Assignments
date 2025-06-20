@@ -1,274 +1,150 @@
-// src/pages/LessonPage.js
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  Container,
-  Paper,
-  Typography,
-  Box,
-  Button,
-  CircularProgress,
-  Alert,
-  Breadcrumbs,
-  Link,
-  Divider,
+  Container, Box, Typography, CircularProgress, Alert, Card, CardContent,
+  Button, Paper, Chip
 } from '@mui/material';
-import {
-  ArrowBack as ArrowBackIcon,
-  ArrowForward as ArrowForwardIcon,
-  CheckCircle as CheckCircleIcon,
-  VideoLibrary as VideoIcon,
-  Description as TextIcon,
-  Assignment as AssignmentIcon,
-  Quiz as QuizIcon,
-} from '@mui/icons-material';
-import courseService from '../services/courseService';
-import { toast } from 'react-toastify';
+import { VideoLibrary as VideoIcon, Description as DescriptionIcon } from '@mui/icons-material';
+import api from '../services/api';
+import progressService from '../services/progressService';
 
 const LessonPage = () => {
-  const { courseId, lessonId } = useParams();
+  const { lessonId } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const [lesson, setLesson] = useState(null);
-  const [course, setCourse] = useState(null);
+  const [moduleLessons, setModuleLessons] = useState([]);
+  const [nextLessonId, setNextLessonId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [completed, setCompleted] = useState(false);
   const [error, setError] = useState('');
-  const [completing, setCompleting] = useState(false);
 
   useEffect(() => {
-    const loadLessonData = async () => {
+    const load = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
-        // Fetch lesson details
-        const lessonResponse = await courseService.getLessonById(lessonId);
-        setLesson(lessonResponse.lesson);
-        
-        // Fetch course details for navigation
-        const courseResponse = await courseService.getCourseById(courseId);
-        setCourse(courseResponse.course);
+        const res = await api.get(`/lessons/${lessonId}`);
+        const { lesson, moduleLessons, nextLessonId } = res.data;
+        setLesson(lesson);
+        setModuleLessons(moduleLessons);
+        setNextLessonId(nextLessonId);
+        setCompleted(lesson.completed === true);
       } catch (err) {
+        console.error(err);
         setError('Failed to load lesson');
-        console.error('Error:', err);
       } finally {
         setLoading(false);
       }
     };
+    load();
+  }, [lessonId]);
 
-    loadLessonData();
-  }, [lessonId, courseId]);
-
-  const handleCompleteLesson = async () => {
+  const handleMarkAsDone = async () => {
     try {
-      setCompleting(true);
-      await courseService.markLessonComplete(lessonId);
-      toast.success('Lesson marked as complete!');
-      // Navigate to next lesson if available
-      navigateToNextLesson();
-    } catch (err) {
-      toast.error('Failed to mark lesson as complete');
-    } finally {
-      setCompleting(false);
+      await progressService.markLessonAsDone(lessonId);
+      setCompleted(true);
+    } catch {
+      // ignore
     }
   };
 
-  const navigateToNextLesson = () => {
-    if (!course || !course.modules) return;
-    
-    // Find current lesson and get next one
-    for (const module of course.modules) {
-      const lessonIndex = module.lessons?.findIndex(l => l.id === parseInt(lessonId));
-      if (lessonIndex !== -1 && lessonIndex < module.lessons.length - 1) {
-        // Next lesson in same module
-        const nextLesson = module.lessons[lessonIndex + 1];
-        navigate(`/courses/${courseId}/lessons/${nextLesson.id}`);
-        return;
-      } else if (lessonIndex === module.lessons.length - 1) {
-        // Last lesson in module, check next module
-        const moduleIndex = course.modules.findIndex(m => m.id === module.id);
-        if (moduleIndex < course.modules.length - 1) {
-          const nextModule = course.modules[moduleIndex + 1];
-          if (nextModule.lessons && nextModule.lessons.length > 0) {
-            navigate(`/courses/${courseId}/lessons/${nextModule.lessons[0].id}`);
-            return;
-          }
-        }
-      }
-    }
-    
-    // No more lessons
-    toast.info('You have completed all lessons!');
-    navigate(`/courses/${courseId}`);
-  };
-
-  const renderLessonContent = () => {
-    if (!lesson) return null;
-
-    switch (lesson.content_type) {
-      case 'video':
-        return (
-          <Box sx={{ position: 'relative', paddingTop: '56.25%', mb: 3 }}>
-            <iframe
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-              }}
-              src={lesson.content_url}
-              title={lesson.title}
-              frameBorder="0"
-              allowFullScreen
-            />
-          </Box>
-        );
-      
-      case 'text':
-        return (
-          <Paper sx={{ p: 3, mb: 3, bgcolor: 'grey.50' }}>
-            <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
-              {lesson.description || 'No content available'}
-            </Typography>
-          </Paper>
-        );
-      
-      case 'assignment':
-        return (
-          <Alert severity="info" sx={{ mb: 3 }}>
-            <Typography variant="body1">
-              This is an assignment lesson. Please check the assignments section for details.
-            </Typography>
-          </Alert>
-        );
-      
-      case 'quiz':
-        return (
-          <Alert severity="info" sx={{ mb: 3 }}>
-            <Typography variant="body1">
-              This lesson contains a quiz. Click the button below to start.
-            </Typography>
-            <Button variant="contained" sx={{ mt: 2 }}>
-              Start Quiz
-            </Button>
-          </Alert>
-        );
-      
-      default:
-        return (
-          <Alert severity="warning" sx={{ mb: 3 }}>
-            Content type not supported
-          </Alert>
-        );
+  const handleNavigateTo = (id) => {
+    if (lesson?.course_id) {
+      navigate(`/courses/${lesson.course_id}/lessons/${id}`);
     }
   };
 
-  const getLessonIcon = (contentType) => {
-    switch (contentType) {
-      case 'video':
-        return <VideoIcon />;
-      case 'text':
-        return <TextIcon />;
-      case 'assignment':
-        return <AssignmentIcon />;
-      case 'quiz':
-        return <QuizIcon />;
-      default:
-        return <TextIcon />;
+  const handleNext = () => {
+    if (nextLessonId && lesson?.course_id) {
+      navigate(`/courses/${lesson.course_id}/lessons/${nextLessonId}`);
     }
   };
 
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
-        <CircularProgress />
-      </Box>
-    );
-  }
+  if (loading) return (
+    <Box display="flex" justifyContent="center" mt={10}>
+      <CircularProgress />
+    </Box>
+  );
+  if (error || !lesson) return (
+    <Alert severity="error">{error || 'Lesson not found'}</Alert>
+  );
 
-  if (error || !lesson) {
-    return (
-      <Container sx={{ mt: 4 }}>
-        <Alert severity="error">{error || 'Lesson not found'}</Alert>
-      </Container>
-    );
-  }
+  const { title, content_type, content_url, content_text } = lesson;
+
+  // اضمن استخدام origin الخادم للفيديوهات المحلية
+  const videoSrc = content_url
+    ? (content_url.startsWith('http')
+        ? content_url
+        : `http://localhost:5000${content_url}`)
+    : null;
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      {/* Breadcrumbs */}
-      <Breadcrumbs sx={{ mb: 3 }}>
-        <Link
-          component="button"
-          variant="body1"
-          onClick={() => navigate('/courses')}
-          underline="hover"
-          color="inherit"
-        >
-          Courses
-        </Link>
-        <Link
-          component="button"
-          variant="body1"
-          onClick={() => navigate(`/courses/${courseId}`)}
-          underline="hover"
-          color="inherit"
-        >
-          {course?.title || 'Course'}
-        </Link>
-        <Typography color="text.primary">{lesson.title}</Typography>
-      </Breadcrumbs>
+      <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={3}>
 
-      <Paper sx={{ p: 4 }}>
-        {/* Lesson Header */}
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-          {getLessonIcon(lesson.content_type)}
-          <Typography variant="h4" sx={{ ml: 2 }}>
-            {lesson.title}
-          </Typography>
-        </Box>
-
-        {lesson.description && (
-          <>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              {lesson.description}
-            </Typography>
-            <Divider sx={{ mb: 3 }} />
-          </>
-        )}
-
-        {/* Lesson Content */}
-        {renderLessonContent()}
-
-        {/* Action Buttons */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-          <Button
-            variant="outlined"
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate(`/courses/${courseId}`)}
-          >
-            Back to Course
-          </Button>
-          
-          <Box sx={{ display: 'flex', gap: 2 }}>
+        {/* تنقل الدروس الجانبي */}
+        <Paper sx={{ width: { xs: '100%', md: 250 }, p: 2, borderRadius: 2, bgcolor: '#f7f9fb' }}>
+          <Typography variant="h6" gutterBottom>Module Lessons</Typography>
+          {moduleLessons.map(l => (
             <Button
-              variant="contained"
-              color="success"
-              startIcon={<CheckCircleIcon />}
-              onClick={handleCompleteLesson}
-              disabled={completing}
+              key={l.id}
+              fullWidth
+              variant={l.id === lesson.id ? 'contained' : 'text'}
+              onClick={() => handleNavigateTo(l.id)}
+              sx={{ justifyContent: 'flex-start', textTransform: 'none', mb: 1 }}
             >
-              {completing ? <CircularProgress size={24} /> : 'Mark as Complete'}
+              {l.title}
             </Button>
-            
-            <Button
-              variant="contained"
-              endIcon={<ArrowForwardIcon />}
-              onClick={navigateToNextLesson}
-            >
-              Next Lesson
-            </Button>
-          </Box>
+          ))}
+        </Paper>
+
+        {/* محتوى الدرس */}
+        <Box flex={1}>
+          <Card elevation={3} sx={{ p: 2, borderRadius: 3 }}>
+            <CardContent>
+              <Box display="flex" alignItems="center" gap={2} mb={2}>
+                {content_type === 'video'
+                  ? <VideoIcon color="primary" />
+                  : <DescriptionIcon color="action" />}
+                <Typography variant="h4" fontWeight={700}>{title}</Typography>
+              </Box>
+
+              {/* عرض الفيديو لو موجود المسار */}
+              {content_type === 'video' && videoSrc && (
+                <Box sx={{ my: 3, borderRadius: 2, overflow: 'hidden', boxShadow: '0 1px 8px #d4e6fa' }}>
+                  <video
+                    src={videoSrc}
+                    controls
+                    style={{ width: '100%', borderRadius: '8px' }}
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </Box>
+              )}
+
+              {/* عرض النص لو كان content_type text */}
+              {content_type === 'text' && (
+                <Paper sx={{ p: 3, mt: 2, bgcolor: '#f6f8fa', borderRadius: 3, fontSize: '1.12rem', lineHeight: 2 }}>
+                  <Typography component="div" dangerouslySetInnerHTML={{ __html: content_text }} />
+                </Paper>
+              )}
+
+              {/* أزرار الإكمال والدرس التالي */}
+              <Box mt={4} display="flex" alignItems="center" gap={2}>
+                {completed
+                  ? <Chip label="✓ Completed" color="success" />
+                  : <Button variant="contained" color="success" onClick={handleMarkAsDone}>
+                      Mark as Done
+                    </Button>}
+                {nextLessonId && (
+                  <Button variant="outlined" onClick={handleNext}>
+                    Next Lesson
+                  </Button>
+                )}
+              </Box>
+            </CardContent>
+          </Card>
         </Box>
-      </Paper>
+      </Box>
     </Container>
   );
 };
